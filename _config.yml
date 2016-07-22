@@ -10,7 +10,7 @@ title: Simone Ferrini' blog
 email: frrn.smn+blog@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   This is just my personal blog.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "http://sferrini.github.io" # the base hostname & protocol for your site
 twitter_username: Simone_Ferrini
 github_username:  sferrini
