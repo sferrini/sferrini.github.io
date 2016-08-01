@@ -102,13 +102,13 @@ As we can see, we allocate a `Man` and a `Woman`, than we enter in an infinity l
 
 - `use` performs a call to the `introduce` method for both objects.
 - `after` allocates an arbitrary sized array (the size is passed in `argv[1]`) and reads the content of the passed file (`argv[2]`)  into it.
-- `free` performs a `delate` call to the two objects previusly allocated.
+- `free` performs a `delete` call to the two objects previously allocated.
 
-As we can easly immagine, if we `free` and then `use` we will get a __Segmentation fault__ because we are trying to dereference the two deallocated objects.
+As we can easily imagine, if we `free` and then `use` we will get a __Segmentation fault__ because we are trying to dereference the two deallocated objects.
 Instead we are going to allocate an object with a crafted vtable pointer in order to point the `introduce` function to `give_shell`.
 
 
-Now let's debug the binary in order to understeand whats happen at binary level:
+Now let's debug the binary in order to understand what's happen at binary level:
 
 ```nasm
 $ gdb uaf
@@ -162,7 +162,7 @@ $ readelf uaf -a | grep Human | c++filt
    118: 000000000040123a    41 FUNC    WEAK   DEFAULT   13 Human::~Human()
 ```
 
-At this point it's preatty clear what we have to do. We have to allocate some memory with the `after` option, to simulate a real `Man` object but with the `vtable` pointer modified in order to call the `give_shell` function instead of `introduce` when we do the `use` option.
+At this point it's pretty clear what we have to do. We have to allocate some memory with the `after` option, to simulate a real `Man` object but with the `vtable` pointer modified in order to call the `give_shell` function instead of `introduce` when we do the `use` option.
 
 If `0x401570` is the `vtable`'s address and we call `introduce` which is at `0x401578` it means that the call we do is at offset `0x401578`-`0x401570` = __8__. Now we can subtract the offset from the `vtable`'s address to obtain the modified pointer: 
 
