@@ -15,5 +15,8 @@ url: "http://sferrini.github.io" # the base hostname & protocol for your site
 twitter_username: Simone_Ferrini
 github_username:  sferrini
 
+# Google services
+google_analytics: UA-81891821-1
+
 # Build settings
 markdown: kramdown
